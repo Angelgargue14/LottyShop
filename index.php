@@ -7,6 +7,6 @@
     <title>Lotty Shop</title>
 </head>
 <body>
-	
+	<h1>HOLA MUNDO WEB</h1>
 </body>
 </html>
