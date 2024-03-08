@@ -3,13 +3,21 @@
 <head>
 	<meta charset="UTF-8">
     <link REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
-    <link REL=StyleSheet HREF="fint-icons/remixicon.css" TYPE="text/css" MEDIA=screen>
+    <link rel="stylesheet" href="font-icons/remixicon.css">
     <script src="main.js" type="text/javascript"></script>
     <title>Lotty Shop</title>
 </head>
 <body>
-	<header>
-		<button><i class="ri-menu-2-fill"></i></button>
+	<header class="headers">
+        <div class="headers" id="header-top">
+
+        </div>
+        <div class="headers" id="header-bottom">
+        	<button id="menu"><span class="ri-menu-line">&nbsp;&nbsp;Navega y se libre</span></button>
+        </div>
+
+		
+
 	</header>
 </body>
 </html>
