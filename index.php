@@ -15,7 +15,7 @@
             
             <div id="loginYcesta">
         	<span class="ri-account-circle-line">
-        	<span class="ri-shopping-cart-line"
+        	<span class="ri-shopping-cart-line">
         	</div>
         </div>
 

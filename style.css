@@ -35,6 +35,11 @@ img#logo{
     max-height: 100%;
 }
 
+div#loginYcesta{
+	width: 50px;
+	height: 30px;
+}
+
 /*CLASES*/
 .headers{
 	position: absolute;
