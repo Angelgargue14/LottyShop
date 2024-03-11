@@ -9,14 +9,19 @@
 </head>
 <body>
 	<header class="headers">
-        <div class="headers" id="header-top">
 
+        <div class="headers" id="header-top">
+        	<img src="img/headers/Logo-tg1.png" name="logo" id="logo">
+            
+            <div id="loginYcesta">
+        	<span class="ri-account-circle-line">
+        	<span class="ri-shopping-cart-line"
+        	</div>
         </div>
+
         <div class="headers" id="header-bottom">
         	<button id="menu"><span class="ri-menu-line">&nbsp;&nbsp;Navega y se libre</span></button>
         </div>
-
-		
 
 	</header>
 </body>

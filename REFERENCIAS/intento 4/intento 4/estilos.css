@@ -1,0 +1,134 @@
+*{
+	padding:0;
+	margin:0;
+}
+a{
+	text-decoration:none;
+	color: black;
+}
+html {
+        height:100%;
+        width:100%;
+}
+body{
+	background-color:rgba(255,255,0,1);
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+#cabecera{
+	width:100%;
+	height:26px;
+	background-color:rgba(0,0,0,1);
+	font-size:15px;
+	display:block;
+	position:relative;
+	z-index:1;
+}
+ol li{
+	display:inline-block;
+	font-size:15px;
+	color:white;
+	font-family:'retro';
+	height:23px;
+	width:auto;
+	text-align:center;
+	padding-right:7px;
+	padding-left:7px;
+	padding-top:3px;
+	margin-top:-2px;
+}
+ol li:hover{
+	cursor:default;
+	background-color:rgba(0,51,255,1);
+	border-bottom:#FF0;
+}
+ol li ol{
+	display:none;
+	position:absolute;
+	width:200px;
+	margin-left:-10px;
+	margin-top:6px;
+}
+ol li ol li{
+	font-size:12px;
+	color: black;
+	width:200px;
+	background-color:rgba(204,204,204,1);
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#nombre:hover{
+	cursor:none;
+	background-color:#000;
+	color:rgba(255,255,0,1);
+}
+
+	
+#btn-principal{
+	background-color: rgba(0,255,255,1);
+	height:26px;
+	
+}
+#btn-principal img{
+	width:29px;
+	height:18px;
+	margin-right:10px;
+	padding-left:10px;
+	cursor:no-drop;
+	
+}
+#cuerpo{
+	position:absolute;
+	width:95%;
+	height:90%;
+}
+.icono{
+	font-family:'retro';
+	width:124px;
+	display:block;
+	margin:30px;
+	border-radius: 10px;
+}
+.titulo{
+	text-align:center;
+	width:124px;
+}
+.imagen span{
+	font-size:120px;
+	
+}
+#tituloExperiencia{
+	font-size:13px;
+}
+#videos:hover{
+	background-color:rgba(0,0,255,0.6);
+}
+#videos:active{
+	background-color:rgba(0,0,255,0.7);
+}
+#experiencia:hover{
+	background-color:rgba(0,0,255,0.6);
+}
+#experiencia:active{
+	background-color:rgba(0,0,255,0.7);
+}
+#academico:hover{
+	background-color:rgba(0,0,255,0.6);
+}
+#academico:active{
+	background-color:rgba(0,0,255,0.7);
+}
+#cv:hover{
+	background-color:rgba(0,0,255,0.6);
+}
+#cv:active{
+	background-color:rgba(0,0,255,0.7);
+}
+#buscaminas:hover{
+	background-color:rgba(0,0,255,0.6);
+}
+#buscaminas:active{
+	background-color:rgba(0,0,255,0.7);
+}

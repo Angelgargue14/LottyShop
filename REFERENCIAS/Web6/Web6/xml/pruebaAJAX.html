@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>volcar xml en html</title>
+</head>
+
+<body>
+	<h1> Volcar XML en HTML </h1>
+    
+    <button id="boton"> volcar XML </button>
+    
+    <div id="ventana"> </div>
+    
+    <script>
+		document.getElementById("boton").addEventListener("click",cargarJuego);
+		
+		function cargarJuego(){
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(this.readyState==4 && this.status==200){
+				cargarXML(this);
+				}
+			};
+			xhr.open("GET", "farCry3.xml",true);
+			xhr.send();
+		}
+		
+		function cargarXML(xml){
+			var docXML = xml.responseXML;
+			var juego = docXML.getElementsByTagName("juego");
+			juego.getElementByTagName("titulo").textContent;
+			document.getElementById('ventana').innerHTML = juego;
+		}
+	</script>
+</body>
+</html>

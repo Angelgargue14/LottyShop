@@ -21,16 +21,30 @@ div#header-bottom{
 button#menu{
 	width: 150px;
 	height: 30px;
-	background-color: rgba(255, 255, 255, 0.2);;
-	margin-left: 5%;
+	background-color: rgba(255, 255, 255, 0);
+	left: 10%;
 }
 
+img#logo{
+	top: 55%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    max-width: 100%;
+    max-height: 100%;
+}
 
 /*CLASES*/
 .headers{
-	background-color: rgba(204, 255, 255, 0.5);
+	position: absolute;
+	background-color: rgba(204, 255, 255, 0);
 	width: 100%;
 	margin-top: 0;
 	border-bottom: 1px solid black;
+}
+
+.headers > *{
+	position: relative;
 }
 

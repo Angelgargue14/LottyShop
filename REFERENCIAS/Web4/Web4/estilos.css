@@ -1,0 +1,49 @@
+body{
+	margin:0 auto;
+	padding:0 auto;
+	background-color:#F93;
+	color: #666;
+	line-height: 1.5em;
+}
+.menu1{
+	background-color: rgb(0,0,0,0);
+	position:relative;
+	margin:0;
+	padding:0;
+	border-bottom: 1px solid black;
+	height:70px;
+	
+}
+#logo{
+	margin-left:20%;
+	position:absolute;
+	z-index:1;
+}
+img.pequeña{
+	width: 170px;
+	height: 80px;
+}
+.menu1 ul{
+	background-color: rgb(0,0,0,0);
+	position:absolute;
+	z-index:1;
+	margin-left: 30%;
+	margin-top:0px;
+	border:3px solid #0F0;
+	height:auto;
+	width:auto;
+}
+.menu1 ul li{
+	list-style:none;
+	display:inline-block;
+	border: 2px solid #00F;
+	padding:15px;
+}
+
+ul li a{
+	font-family: sans-serif;
+	font-size: x-large;
+}
+.menu1 ul li ul{
+	display:none;
+}

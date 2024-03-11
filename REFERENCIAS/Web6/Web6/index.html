@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="estilos.css" rel="stylesheet" type="text/css" />
+   <script type="text/javascript" src="./javascript.js"></script>
+  <link rel="icon" href="img/Logo-g1.ico" />
+  <link rel="stylesheet" href="typicons.font-master/src/font/typicons.min.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.dataTables.min.js"></script>
+  
+  <meta charset="utf-8" />
+  
+  <title>Gametol.net | tu portal de videojuegos</title>
+</head>
+<body>
+	
+
+	<div id="cabecera">
+    <marquee><p>Para que la página sea rentable el primer click lleva a publicidad y el segundo a su destino</p></marquee>
+    	<input type="checkbox" id="chk-menu" />
+        <label for="chk-menu" id="btn-menu" ><span class="typcn typcn-th-menu-outline" onClick="mostrar()" id="btn-menu"></span></label>
+        
+        <a href="index.html"> <img src="img/Logo-tg1.png" name="logo" id="logo"> </a>
+        
+        <header>
+              <input type="search" id="input-search" placeholder="Buscar aquí">
+              
+              <div class="content-search">
+                  <div class="content-table">
+                      <table id="table">
+                          <thead>
+                              <tr>
+                                  <td></td>
+                              </tr>
+                          </thead>
+                          
+                          <tbody>
+                              <tr>
+                                  <td><a href="#">Inicio</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">css</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">index</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">php</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">html</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">jueos</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">call of duty</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">need for speed</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">mario</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">pap</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">pop</a></td>
+                              </tr>
+                              
+                              <tr>
+                                  <td><a href="#">carrear</a></td>
+                              </tr>
+                              
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </header>
+          <script src="js/search.js"></script><!--FIN BUSCADOR-->
+    </div>
+    
+    <nav class="menu" id="menu">
+    	<ul>
+        	<li><a href="index.html"><span class="typcn typcn-home-outline"></span> Inicio </a></li>
+            
+            <li class="titulillo">Juegos De PC</li>
+            
+            <li><a href="#" id="btn_AR" onClick="menu('btn_AR')"><span class="typcn typcn-puzzle-outline"></span> Altos Requisitos </a></li>
+            <li><a href="#" id="btn_MR" onClick="menu('btn_MR')"><span class="typcn typcn-puzzle-outline"></span>  Medios Requisitos </a></li>
+            <li><a href="#" id="btn_BR" onClick="menu('btn_BR')"><span class="typcn typcn-puzzle-outline"></span>  Bajos Requisitos </a></li>
+            
+            <li class="titulillo">Mundo Android</li>
+            
+            <li><a href="#" id="btn_APK" onClick="menu('btn_APK')"> <span class="typcn typcn-device-phone"></span> Aplicaciones </a></li>
+            <li><a href="#" id="btn_APKJ" onClick="menu('btn_APKJ')"> <span class="typcn typcn-device-phone"></span> Juegos </a></li>
+            
+            <li class="titulillo">Otros</li>
+            
+            <li class="solitario"><a href="#" id="btn_EMU" onClick="menu('btn_EMU')"> <span class="typcn typcn-book"></span> Emuladores </a></li>
+            
+            <li class="solitario"><a href="#" id="btn_PROG" onClick="menu('btn_PROG')"> <span class="typcn typcn-directions"></span> Programas Necesarios </a></li>
+            
+            <li class="solitario"><a href="#"> <span class="typcn typcn-beer"></span> ¿Como Descargar? </a></li>
+            
+        </ul>
+    </nav>
+	<div id="contenido">
+         <div class="galeria">
+              <a href=""><img src="img/galeria/fallout-76.jpg" id="gal01"></a>
+              <a href=""><img src="img/galeria/Tomb-Raider.png" id="gal02"></a>
+              <a href=""><img src="img/galeria/crashBandicot.jpg" id="gal03"></a>
+              <a href="https://www.4shared.com/s/fHGx1erD5ee"><img src="img/galeria/cuphead.jpg" id="gal04"></a>
+              <a href=""><img src="img/galeria/f12017.jpg" id="gal05"></a>
+              <span class="typcn typcn-chevron-right-outline" id="boton-derecha" onClick="galeria(1)"></span>
+              <span class="typcn typcn-chevron-left-outline" id="boton-izquierda" onClick="galeria(-1)"></span>
+         </div><!--GALERIA-->
+          <div class="titulos-div pos_titulos_altos">
+            <h3> <span class="typcn typcn-heart-outline"></span> Altos Requisitos:</h3>
+          </div>
+          <div class="altos_favoritos">
+            <div class="tarjeta_favoritos fav01" onMouseOver="estilosTarjetasOver_fav_general('fav_a1')" onMouseOut="estilosTarjetasOut_fav_general('fav_a1')">
+                <a itemprop="url" href="#" id="fav_a1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav02" onMouseOver="estilosTarjetasOver_fav_general('fav_a2')" onMouseOut="estilosTarjetasOut_fav_general('fav_a2')">
+                <a itemprop="url" href="#" id="fav_a2" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav03" onMouseOver="estilosTarjetasOver_fav_general('fav_a3')" onMouseOut="estilosTarjetasOut_fav_general('fav_a3')">
+                <a itemprop="url" href="#" id="fav_a3" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav04" onMouseOver="estilosTarjetasOver_fav_general('fav_a4')" onMouseOut="estilosTarjetasOut_fav_general('fav_a4')">
+                <a itemprop="url" href="#" id="fav_a4" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav05" onMouseOver="estilosTarjetasOver_fav_general('fav_a5')" onMouseOut="estilosTarjetasOut_fav_general('fav_a5')">
+                <a itemprop="url" href="#" id="fav_a5" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav06" onMouseOver="estilosTarjetasOver_fav_general('fav_a6')" onMouseOut="estilosTarjetasOut_fav_general('fav_a6')">
+                <a itemprop="url" href="#" id="fav_a6" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav07" onMouseOver="estilosTarjetasOver_fav_general('fav_a7')" onMouseOut="estilosTarjetasOut_fav_general('fav_a7')">
+                <a itemprop="url" href="#" id="fav_a7" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav08" onMouseOver="estilosTarjetasOver_fav_general('fav_a8')" onMouseOut="estilosTarjetasOut_fav_general('fav_a8')">
+                <a itemprop="url" href="#" id="fav_a8" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+          </div><!--ALTOS FAVORITOS-->
+          
+          <div class="titulos-div pos_titulos_medios">
+            <h3> <span class="typcn typcn-heart-outline"></span> Medios Requisitos:</h3>
+          </div>
+          <div class="medios_favoritos">
+            <div class="tarjeta_favoritos fav09" onMouseOver="estilosTarjetasOver_fav_general('fav_a9')" onMouseOut="estilosTarjetasOut_fav_general('fav_a9')">
+                <a itemprop="url" href="#" id="fav_a9" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav10" onMouseOver="estilosTarjetasOver_fav_general('fav_10')" onMouseOut="estilosTarjetasOut_fav_general('fav_10')">
+                <a itemprop="url" href="#" id="fav_10" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav11" onMouseOver="estilosTarjetasOver_fav_general('fav_11')" onMouseOut="estilosTarjetasOut_fav_general('fav_11')">
+                <a itemprop="url" href="#" id="fav_11" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav12" onMouseOver="estilosTarjetasOver_fav_general('fav_12')" onMouseOut="estilosTarjetasOut_fav_general('fav_12')">
+                <a itemprop="url" href="#" id="fav_12" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav13" onMouseOver="estilosTarjetasOver_fav_general('fav_13')" onMouseOut="estilosTarjetasOut_fav_general('fav_13')">
+                <a itemprop="url" href="#" id="fav_13" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav14" onMouseOver="estilosTarjetasOver_fav_general('fav_14')" onMouseOut="estilosTarjetasOut_fav_general('fav_14')">
+                <a itemprop="url" href="#" id="fav_14" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav15" onMouseOver="estilosTarjetasOver_fav_general('fav_15')" onMouseOut="estilosTarjetasOut_fav_general('fav_15')">
+                <a itemprop="url" href="#" id="fav_15" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav16" onMouseOver="estilosTarjetasOver_fav_general('fav_16')" onMouseOut="estilosTarjetasOut_fav_general('fav_16')">
+                <a itemprop="url" href="#" id="fav_16" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+          </div><!--MEDIOS FAVORITOS-->
+          
+          <div class="titulos-div pos_titulos_bajos">
+            <h3> <span class="typcn typcn-heart-outline"></span> Bajos Requisitos:</h3>
+          </div>
+          <div class="bajos_favoritos">
+            <div class="tarjeta_favoritos fav17" onMouseOver="estilosTarjetasOver_fav_general('fav_17')" onMouseOut="estilosTarjetasOut_fav_general('fav_17')">
+                <a itemprop="url" href="#" id="fav_17" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav18" onMouseOver="estilosTarjetasOver_fav_general('fav_18')" onMouseOut="estilosTarjetasOut_fav_general('fav_18')">
+                <a itemprop="url" href="#" id="fav_18" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav19" onMouseOver="estilosTarjetasOver_fav_general('fav_19')" onMouseOut="estilosTarjetasOut_fav_general('fav_19')">
+                <a itemprop="url" href="#" id="fav_19" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos fav20" onMouseOver="estilosTarjetasOver_fav_general('fav_20')" onMouseOut="estilosTarjetasOut_fav_general('fav_20')">
+                <a itemprop="url" href="#" id="fav_20" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav21" onMouseOver="estilosTarjetasOver_fav_general('fav_21')" onMouseOut="estilosTarjetasOut_fav_general('fav_21')">
+                <a itemprop="url" href="#" id="fav_21" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav22" onMouseOver="estilosTarjetasOver_fav_general('fav_22')" onMouseOut="estilosTarjetasOut_fav_general('fav_22')">
+                <a itemprop="url" href="#" id="fav_22" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav23" onMouseOver="estilosTarjetasOver_fav_general('fav_23')" onMouseOut="estilosTarjetasOut_fav_general('fav_23')">
+                <a itemprop="url" href="#" id="fav_23" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+             <div class="tarjeta_favoritos fav24" onMouseOver="estilosTarjetasOver_fav_general('fav_24')" onMouseOut="estilosTarjetasOut_fav_general('fav_24')">
+                <a itemprop="url" href="#" id="fav_24" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+          </div><!--BAJOS FAVORITOS-->
+          
+    </div><!--CONTENIDO-->
+    
+    <div id="contenido_AR">
+    	<div id="altosRequisitos">
+            <div class="tarjeta_favoritos ar2" onMouseOver="estilosTarjetasOver_fav_general('ar2')" onMouseOut="estilosTarjetasOut_fav_general('ar2')">
+                <a itemprop="url" href="#" id="ar2" data-id="002" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos ar1" onMouseOver="estilosTarjetasOver_fav_general('ar1')" onMouseOut="estilosTarjetasOut_fav_general('ar1')">
+                <a itemprop="url" href="#" id="ar1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+        </div><!--ALTOS REQUISITOS-->
+    </div><!--Contenido_AR-->
+    
+    <div id="contenido_MR">
+    	<div id="mediosRequisitos">
+        	<div class="tarjeta_favoritos mr2" onMouseOver="estilosTarjetasOver_fav_general('mr2')" onMouseOut="estilosTarjetasOut_fav_general('mr2')">
+                <a itemprop="url" href="#" id="mr2" data-id="002" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos mr1" onMouseOver="estilosTarjetasOver_fav_general('mr1')" onMouseOut="estilosTarjetasOut_fav_general('mr1')">
+                <a itemprop="url" href="#" id="mr1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+        </div><!--MEDIOS REQUISITOS-->
+    </div><!--Contenido_MR-->
+    
+    <div id="contenido_BR">
+    	<div id="bajosRequisitos">
+        	<div class="tarjeta_favoritos br2" onMouseOver="estilosTarjetasOver_fav_general('br2')" onMouseOut="estilosTarjetasOut_fav_general('br2')">
+                <a itemprop="url" href="#" id="br2" data-id="002" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+            <div class="tarjeta_favoritos br1" onMouseOver="estilosTarjetasOver_fav_general('br1')" onMouseOut="estilosTarjetasOut_fav_general('br1')">
+                <a itemprop="url" href="#" id="br1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+        </div><!--BAJOS REQUISITOS-->
+    </div><!--Contenido_BR-->
+    
+    <div id="contenido_APK">
+    	<div id="aplicaciones">
+        	<div class="tarjeta_favoritos apk2" onMouseOver="estilosTarjetasOver_fav_general('apk2')" onMouseOut="estilosTarjetasOut_fav_general('apk2')">
+                <a itemprop="url" href="#" id="apk2" data-id="002" data-name="farcry_3" data-category="altos_requisitos">Mis huevos negros </a>
+            </div>
+        	<div class="tarjeta_favoritos apk1" onMouseOver="estilosTarjetasOver_fav_general('apk1')" onMouseOut="estilosTarjetasOut_fav_general('apk1')">
+                <a itemprop="url" href="#" id="apk1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+        </div><!--APLICACIONES-->
+    </div><!--Contenido APLICACIONES-->
+    
+    <div id="contenido_APKJ">
+    	<div id="juegosAPKJ">
+        	<div class="tarjeta_favoritos apkj2" onMouseOver="estilosTarjetasOver_fav_general('apkj2')" onMouseOut="estilosTarjetasOut_fav_general('apkj2')">
+                <a itemprop="url" href="#" id="apkj2" data-id="002" data-name="farcry_3" data-category="altos_requisitos">Mis huevos negros </a>
+            </div>
+        	<div class="tarjeta_favoritos apkj1" onMouseOver="estilosTarjetasOver_fav_general('apkj1')" onMouseOut="estilosTarjetasOut_fav_general('apkj1')">
+                <a itemprop="url" href="#" id="apkj1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+        </div><!--JUEGOS APK-->
+    </div><!--Contenido JUEGOS APLICACIONES-->
+    
+    <div id="contenido_EMU">
+    	<div id="emuladores">
+        	<div class="tarjeta_favoritos emu1" onMouseOver="estilosTarjetasOver_fav_general('emu1')" onMouseOut="estilosTarjetasOut_fav_general('emu1')">
+                <a itemprop="url" href="#" id="emu1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+        </div><!--EMULADORES-->
+    </div><!--CONTENIDO EMULADORES-->
+    
+    <div id="contenido_PROG">
+    	<div id="programas">
+        	<div class="tarjeta_favoritos prog1" onMouseOver="estilosTarjetasOver_fav_general('prog1')" onMouseOut="estilosTarjetasOut_fav_general('prog1')">
+                <a itemprop="url" href="#" id="prog1" data-id="001" data-name="farcry_3" data-category="altos_requisitos">FarCry 3</a>
+            </div>
+        </div><!--PROGRAMAS-->
+    </div><!--CONTENIDO PROGRAMAS-->
+    
+    <!--JUEGOS-->
+    	
+</body>
+</html>

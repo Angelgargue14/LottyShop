@@ -1,0 +1,54 @@
+<juego>
+	<titulo>FARCRY 3</titulo>
+	
+	<portada>imagenes/portadaFarcry3</portada>
+	
+	<descriptcion>
+		Far Cry 3 (estilizado como FARCRY3) es un juego de acción y supervivencia en el trópico, creado por Ubisoft Montreal y Massive Studios que se lanzó el 29 de noviembre del 2012 para 				PlayStation 3, Xbox 360 y Microsoft Windows. El juego pone al jugador en el papel de Jason Brody, un turista varado en una misteriosa isla tropical aislado de la civilización. En este paraíso salvaje donde el caos y la violencia son moneda corriente, el jugador decidirá cuándo, dónde y cómo se desarrollarán los eventos y situaciones que se le presentarán a lo largo de la historia.
+
+Far Cry 3 toma lugar en alguna isla entre el océano Índico y el pacífico. La presencia de un Mitsubishi A6M Zero destrozado al principio del tráiler oficial sitúa al juego en alguna parte del pacífico. El objetivo principal de este es rescatar a los amigos y novia del protagonista, capturados por los piratas que habitan en las islas, y escapar de las mismas.
+	</descriptcion>
+	
+	<fichaTecnica>
+		<plataforma> PC </plataforma>
+		<idioma> español</idioma>
+		<tamaño>39.8GB</tama>
+		<formato>ISO,1DVD</formato>
+		<genero>Acción, Aventura</genero>
+	</fichaTecnica>
+	
+	<capturas>
+		<imagen1> imagenes/imagen1.jpg </imagen1>
+		<imagen2> imagenes/imagen2.jpg </imagen2>
+		<imagen3> imagenes/imagen3.jpg </imagen3>
+		<imagen4> imagenes/imagen4.jpg </imagen4>
+		<imagen5> imagenes/imagen5.jpg </imagen5>
+	</capturas>
+	
+	<trailer>https://www.youtube.com/watch?v=aQTDKsgtkR8</trailer>
+	
+	<requisitosMinimos>
+		<t1>Medios Requisitos</t1>
+		<so>windows 7 sp1, linux nosque </so>
+		<ram> 8Gb </ram>
+		<grafica>radeon r9</grafica>
+		<directx> Directx version 11</directx>
+		<almacenamiento> 46GB </almacenamiento>
+	</requisitosMinimos>
+	<requisitosRecomendados>
+		<t1>Medios Requisitos</t1>
+		<so>windows 7 sp1, linux nosque </so>
+		<ram> 8Gb </ram>
+		<grafica>radeon r9</grafica>
+		<directx> Directx version 11</directx>
+		<almacenamiento> 46GB </almacenamiento>
+	</requisitosRecomendados>
+	
+	<enlacesDescarga>
+		<torrent> </torrent>
+		<4shared> </4shared>
+		<mega> </mega>
+		
+		<password>	</password>
+	</enlacesDescarga>
+</juego>
