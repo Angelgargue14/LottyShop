@@ -6,6 +6,20 @@ body{
     background-color: white;
 }
 
+/*CLASES*/
+.headers{
+	position: absolute;
+	background-color: rgba(204, 255, 255, 0);
+	width: 100%;
+	margin-top: 0;
+	border-bottom: 1px solid black;
+}
+
+.headers > *{
+	position: relative;
+}
+
+/*RESTO*/
 header{
 	height: 120px;
 }
@@ -22,12 +36,12 @@ button#menu{
 	width: 150px;
 	height: 30px;
 	background-color: rgba(255, 255, 255, 0);
-	left: 10%;
+	left: 1%;
 }
 
 img#logo{
 	top: 55%;
-    left: 20%;
+    left: 10%;
     transform: translate(-50%, -50%);
     pointer-events: none;
     user-select: none;
@@ -36,20 +50,19 @@ img#logo{
 }
 
 div#loginYcesta{
-	width: 50px;
+	width: 220px;
 	height: 30px;
+	position:relative;
+    float:right;
 }
 
-/*CLASES*/
-.headers{
-	position: absolute;
-	background-color: rgba(204, 255, 255, 0);
-	width: 100%;
-	margin-top: 0;
-	border-bottom: 1px solid black;
+div#loginYcesta button{
+	padding: 3px;
+	background-color: rgba(255, 255, 255, 0);
 }
 
-.headers > *{
+div#loginYcesta button span{
 	position: relative;
+	font-size: 18px;
+	width: 30px;
 }
-
