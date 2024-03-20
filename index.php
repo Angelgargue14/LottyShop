@@ -9,21 +9,20 @@
 </head>
 <body>
 	<header class="headers">
-
-        <div class="headers" id="header-top">
         	<img src="img/headers/Logo-tg1.png" name="logo" id="logo">
-            
-
-        </div>
-
-        <div class="headers" id="header-bottom">
-        	<button id="menu"><span class="ri-menu-line">&nbsp;&nbsp;Navega y se libre</span></button>
+	</header>
+   
+    <nav class="headers">
+            <button id="menu"><span class="ri-menu-line">&nbsp;&nbsp;Navega y se libre</span></button>
             <div id="loginYcesta">
             <button><span class="ri-account-circle-line"> Mi Cuenta </span></button>
             <button><span class="ri-shopping-cart-line"> Mi Cesta </span></button>
             </div>
-        </div>
+    </nav>
 
-	</header>
+    <main>
+        <p>hola soy un parrafo en el main</p>
+
+    </main>
 </body>
 </html>
