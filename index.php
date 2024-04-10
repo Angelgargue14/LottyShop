@@ -15,8 +15,8 @@
     <nav class="headers">
             <button id="menu"><span class="ri-menu-line">&nbsp;&nbsp;Navega y se libre</span></button>
             <div id="loginYcesta">
-            <button><span class="ri-account-circle-line"> Mi Cuenta </span></button>
-            <button><span class="ri-shopping-cart-line"> Mi Cesta </span></button>
+              <button><span class="ri-account-circle-line"> Mi Cuenta </span></button>
+              <button><span class="ri-shopping-cart-line"> Mi Cesta </span></button>
             </div>
     </nav>
 
