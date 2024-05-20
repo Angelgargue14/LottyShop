@@ -28,19 +28,55 @@ CREATE TABLE empleados (
 ) COMMENT='Tabla que almacena información de empleados';
 
 CREATE TABLE ARTICULOS (
- ID_ARTÍCULO VARCHAR(6) PRIMARY KEY COMMENT 'Identificador unico del articulo',
- NOMBRE VARCHAR(100) NOT NULL COMMENT 'Nombre del articulo',
+ ID_ARTÍCULO VARCHAR2(6) PRIMARY KEY COMMENT 'Identificador unico del articulo',
+ NOMBRE VARCHAR2(100) NOT NULL COMMENT 'Nombre del articulo',
  DESCRIPCION TEXT COMMENT 'Comentario del articulo para su descripcion al publico',
  PRECIO DECIMAL(10,2) NOT NULL COMMENT 'Precio final del articulo',
  CREACION DATE NOT NULL COMMENT 'Fecha de creacion del articulo',
  ACTUALIZACION DATE NOT NULL COMMENT 'Fecha de ultimo cambio del articulo',
  PESO DECIMAL(10,2) NOT NULL COMMENT 'Peso del articulo',
- DIMENSIONES VARCHAR(100) NOT NULL COMMENT 'Dimesiones tipo AAxLLxFF (alto, largo y fondo)',
+ DIMENSIONES VARCHAR2(100) NOT NULL COMMENT 'Dimesiones tipo AAxLLxFF (alto, largo y fondo)',
  DESCUENTO DECIMAL(4) NOT NULL COMMENT 'PORCENTAJE DE DESCUENTO  EJEMPLO: 12,02',
- UBICACION VARCHAR(10) COMMENT 'CODIGO DE LA UBICACION',
+ UBICACION VARCHAR2(10) COMMENT 'CODIGO DE LA UBICACION',
  DISPONIBILIDAD BOOLEAN NOT NULL COMMENT ' TRUE QUEDA STOCK, FALSE NO QUE DA STOCK',
  GARANTIA INT NOT NULL COMMENT 'Garantia en dias, si es un año 365',
- COMENTARIOS_INTERNOS VARCHAR(255) 'Comentarios de fabrica',
+ COMENTARIOS_INTERNOS VARCHAR2(255) 'Comentarios de fabrica',
  IMPUESTO DECIMAL(4) NOT NULL COMMENT 'Dato porcentual',
 ) COMMENT='Tabla de articulos';
 
+CREATE TABLE LOTES (
+ID_LOTE VARCHAR2(6) PRIMARY KEY COMMENT 'Identificador unico del lote',
+ID_ARTÍCULO VARCHAR2(6) PRIMARY KEY COMMENT 'Identificador unico del articulo',
+CANTIDAD INT NOT NULL COMMENT 'Cantidad de unidades del lote',
+RECEPCION DATE NOT NULL COMMENT 'Fecha de alta del lote en el almacén',
+CADUCIDAD DATE NOT NULL COMMENT 'Fecha de caducidad del lote',
+PRECIO_COMPRA DECIMAL(10,2) NOT NULL COMMENT 'Precio de compra de cada unidad del lote',
+PROVEEDOR VARCHAR2(60) NOT NULL COMMENT 'Proveedor del producto',
+UBICACION VARCHAR2(8) COMMENT 'Ubicación en el almacén',
+CREACION DATE COMMENT 'Fecha primera creación del lote',
+ACTUALIZACION DATE COMMENT 'Fecha última actualización del lote',
+COSTE DECIMAL(10,2) COMMENT 'Precio de venta al publico, posible trigger PRECIO_COMPRA+ARTICULO.IMPUESTO+PORCENTAJE',
+PORCENTAJE DECIMAL(4) COMMENT 'Porcentaje de gancia, dato porcentual',
+COMENTARIOS TEXT COMMENT 'Comentario del lote para gestión interna',
+--STOCK_TOTAL 
+STOCK_RESERVADO INT NOT NULL COMMENT 'Cantidad de unidades reservadas',
+STOCK_DESECHADO INT NOT NULL COMMENT 'Cantidad de unidades rotas',
+)COMMENT='Tabla de lotes';
+
+CREATE TABLE PEDIDOS (
+ID_PEDIDO VARCHAR2(15) PRIMARY KEY COMMENT 'Identificador unico del pedido',
+ID_CLIENTE VARCHAR2(6) PRIMARY KEY COMMENT 'Identificador unico del cliente',
+FECHA_COMPRA DATE COMMENT 'Fecha y hora de compra del pedido',
+ESTADO 
+PAGADO
+DIRECCION_ENVIO
+NOTAS_INTERNAS
+FECHA_ENTREGA
+FECHA_ENVIO
+INICIO_PREPARACION
+FIN_PREPARACION
+CODIGO_DESCUENTO
+TOTAL_PAGADO
+FECHA_PAGO
+DESCUENTO
+)COMMENT='Tabla de pedidos';
