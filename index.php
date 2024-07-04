@@ -21,8 +21,27 @@
     </nav>
 
     <main>
-        <p>hola soy un parrafo en el main</p>
+        <aside id="enlaces">  
+            <ul>
+              <li><a href="">Inicio</li>
+              <li><a href="">cosas sexis</li>
+              <li><a href="">coches</li>
+              <li><a href="">motocicletas</li>
+            </ul>
+        </aside>
+        
+        <aside id="presentacion">
+            <img src="img/aside/presentacion.jpg">
+        </aside>
+
+        <section>
+
+        </section>
 
     </main>
+
+    <footer>
+
+    </footer>
 </body>
 </html>

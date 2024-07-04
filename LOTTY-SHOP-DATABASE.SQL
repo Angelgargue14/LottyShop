@@ -67,7 +67,7 @@ CREATE TABLE PEDIDOS (
 ID_PEDIDO VARCHAR(15) PRIMARY KEY COMMENT 'Identificador unico del pedido',
 ID_CLIENTE VARCHAR(6) PRIMARY KEY COMMENT 'Identificador unico del cliente',
 FECHA_COMPRA DATETIME COMMENT 'Fecha y hora de compra del pedido',
-ESTADO 
+ESTADO  ENUM('Pendiente', 'En proceso', 'Enviado', 'Entregado', 'Cancelado') COMMENT '',
 PAGADO
 DIRECCION_ENVIO
 NOTAS_INTERNAS
@@ -80,3 +80,15 @@ TOTAL_PAGADO
 FECHA_PAGO
 DESCUENTO
 )COMMENT='Tabla de pedidos';
+
+Pendiente: El pedido ha sido recibido pero aún no ha sido procesado o confirmado.
+En proceso: El pedido está siendo procesado y preparado para su envío.
+Enviado: El pedido ha sido enviado y está en tránsito hacia su destino.
+Entregado: El pedido ha sido entregado al destinatario.
+Cancelado: El pedido ha sido cancelado antes de su envío o entrega.
+Devuelto: El pedido ha sido devuelto por el cliente y se está procesando la devolución.
+Reembolsado: El pedido ha sido devuelto y se ha realizado el reembolso al cliente.
+En espera de pago: El pedido ha sido recibido pero aún no se ha realizado el pago.
+Pagado: El pago del pedido ha sido recibido y confirmado.
+En espera de stock: El pedido está pendiente de disponibilidad de stock para su procesamiento.
+En espera de confirmación: El pedido está pendiente de confirmación adicional antes de su procesamiento.

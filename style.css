@@ -2,8 +2,14 @@
     margin: 0;
     padding: 0;
 }
+
+html{
+    position: relative;
+}
+
 body{	
     background-color: rgba(247, 222, 208,0.5);
+    position: relative;
 }
 
 /*CLASES*/
@@ -19,10 +25,14 @@ body{
 }
 
 /*RESTO*/
+
+/*header*/
 header{
 	height: 90px;
 }
+/*fin header*/
 
+/*nav*/
 nav{
 	height: 30px;
 	
@@ -64,14 +74,50 @@ div#loginYcesta button span{
 	font-size: 13px;
 	width: 30px;
 }
+/*fin nav*/
 
+/*aside*/
+aside{
+  position: absolute;
+  width: 50%;
+  height: 100vh;
+  top:0;
+  bottom: 0;
+}
+
+aside#enlaces{
+    left: 0px;
+    background-color: red;
+
+}
+
+aside#enlaces ul{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+aside#presentacion{
+	right: 0px;
+	background-color: blue;
+
+}
+
+aside#presentacion img{
+	width: 100%;
+	height: 100%;
+}
+/*fin aside*/
+
+/*main*/
 main{
 	width: 80%;
 	height: auto;
-	position: relative;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
 	border: 1px solid black;
 	background-color: rgba(226, 191, 179,1);
 }
+/*fin main*/
