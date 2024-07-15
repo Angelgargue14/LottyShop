@@ -1,0 +1,286 @@
+Determinar y configurar el hardware
+1. Listar el hardware usb disponible en la máquina virtual.
+ -> lsusb
+2. Listar el hardware pci disponible.
+ -> lspci
+
+Arranque del sistema
+1. Indicar el gestor de servicios que está utilizando el servidor.
+ 1.1 systemd
+  despliegue@ESMADLX22PROC1DEV:~$ ps -aux| grep systemd
+  root         528  0.0  2.5 355912 210572 ?       S<s  jul13   2:40 /lib/systemd/systemd-journald
+  root         571  0.0  0.0  25180  7928 ?        Ss   jul13   0:06 /lib/systemd/systemd-udevd
+  systemd+     906  0.0  0.0  91232  6364 ?        Ssl  jul13   0:00 /lib/systemd/systemd-timesyncd
+  systemd+    1000  0.0  0.0  19424  7676 ?        Ss   jul13   0:01 /lib/systemd/systemd-networkd
+  systemd+    1004  0.0  0.1  25164 13176 ?        Ss   jul13   0:14 /lib/systemd/systemd-resolved
+  message+    1025  0.0  0.0   8104  4940 ?        Ss   jul13   0:06 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+  root        1057  0.0  0.0  17872  7788 ?        Ss   jul13   0:01 /lib/systemd/systemd-logind
+  develop+    5880  0.0  0.1  19544 10032 ?        Ss   jul13   0:00 /lib/systemd/systemd --user
+  samuel    390305  0.0  0.1  19544  9824 ?        Ss   09:28   0:00 /lib/systemd/systemd --user
+  desplie+  645899  0.0  0.1  19540  9816 ?        Ss   13:27   0:00 /lib/systemd/systemd --user
+  desplie+  651129  0.0  0.0 100004  2672 pts/8    S+   13:31   0:00 grep --color=auto systemd
+ 2.1 upstart 
+  despliegue@ESMADLX22PROC1DEV:~$ ps -aux| grep upstart
+  desplie+  651384  0.0  0.0 100004   656 pts/8    S+   13:32   0:00 grep --color=auto upstart
+
+como podemos ver, systemd es el que está funcionando en el servidor, upstart es para versiones más antiguas.
+
+despliegue@ESMADLX22PROC1DEV:~$ systemd --version
+systemd 245 (245.4-4ubuntu3.23)
++PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
+
+2. Describe brevemente el proceso de arranque del sistema
+
+podriamos seccionarlo en los siguientes pasos:
+
+ 2.1. Inicialización del hardware: Cuando enciendes tu computadora, la BIOS (Basic Input/Output System) o UEFI (Interfaz Unificada de Firmware Extensible) se encarga de inicializar el hardware, realizar pruebas de memoria y verificar la configuración de inicio.
+
+ 2.2  Cargador de arranque: El cargador de arranque, como GRUB (GRand Unified Bootloader), se encarga de ubicar el kernel del sistema operativo en un dispositivo de almacenamiento y cargarlo en la memoria de la computadora.
+
+ 2.3  Inicio del kernel: Una vez cargado en la memoria, el kernel del sistema operativo se ejecuta y realiza la configuración del sistema, como la inicialización de interrupciones, la gestión de memoria, la carga de controladores de dispositivos y otras tareas esenciales.
+
+ 2.4  Proceso de Init: El proceso de Init es el primer proceso que se inicia directa o indirectamente por el kernel. Es responsable de iniciar otros procesos y realizar tareas como montar el sistema de archivos, configurar el hostname y establecer la configuración inicial del sistema.
+
+ 2.5  Proceso de usuario: Una vez que el sistema ha completado la carga del kernel y el proceso de Init, se inician los procesos de usuario y se carga la interfaz de usuario, lo que permite la interacción con el sistema operativo.
+
+Cambiar niveles de ejecución y apagar o reiniciar el
+sistema
+1. Indicar el nivel de ejecución o el target de arranque del servidor. Indicar el comando
+ejecutado
+
+los niveles de ejecución son los siguientes:
+
+  Nivel 0: Apagado
+  Nivel 1: Modo de usuario único (modo de mantenimiento)
+  Nivel 2: Modo multiusuario sin servicios de red
+  Nivel 3: Modo multiusuario con servicios de red
+  Nivel 4: Reservado para uso personalizado
+  Nivel 5: Modo multiusuario con interfaz gráfica (por ejemplo, entorno de escritorio)
+  Nivel 6: Reinicio
+
+  despliegue@ESMADLX22PROC1DEV:~$ systemctl get-default
+  graphical.target
+
+  despliegue@ESMADLX22PROC1DEV:~$ runlevel
+  N 5
+
+2. Cambia el target de arranque/nivel de ejecución. Indica el procedimiento.
+  sudo systemctl isolate basic.target 
+  sudo systemctl isolate multi-user.target
+  sudo systemctl set-default basic.target 
+  sudo systemctl set-default graphical.target
+  sudo reboot
+
+Particionado del disco
+1. Identificar el particionado que está utilizando por defecto el servidor del entorno de pruebas
+desplegado
+despliegue@ESMADLX22PROC1DEV:~$ lsblk
+NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+loop0                       7:0    0  40,8M  1 loop /snap/bpftrace/160
+loop1                       7:1    0  55,7M  1 loop /snap/core18/2823
+loop2                       7:2    0  55,7M  1 loop /snap/core18/2829
+loop3                       7:3    0    64M  1 loop /snap/core20/2264
+loop4                       7:4    0    64M  1 loop /snap/core20/2318
+loop5                       7:5    0    37M  1 loop /snap/gh/502
+loop6                       7:6    0  74,2M  1 loop /snap/core22/1122
+loop7                       7:7    0  74,2M  1 loop /snap/core22/1380
+loop8                       7:8    0  91,8M  1 loop /snap/lxd/23991
+loop9                       7:9    0  91,9M  1 loop /snap/lxd/24061
+loop10                      7:10   0  38,8M  1 loop /snap/snapd/21759
+loop11                      7:11   0  38,8M  1 loop /snap/snapd/21465
+loop12                      7:12   0    64M  1 loop /snap/sublime-text/137
+loop13                      7:13   0    64M  1 loop /snap/sublime-text/156
+sda                         8:0    0   150G  0 disk
+├─sda1                      8:1    0     1M  0 part
+├─sda2                      8:2    0     1G  0 part /boot
+└─sda3                      8:3    0 129,4G  0 part
+  └─ubuntu--vg-ubuntu--lv 253:0    0   109G  0 lvm  /
+sdb                         8:16   0    10G  0 disk
+└─sdb1                      8:17   0    10G  0 part
+  └─ubuntu--vg-ubuntu--lv 253:0    0   109G  0 lvm  /
+sr0                        11:0    1  1024M  0 rom
+  
+
+Gestor de arranque
+1. Indica el gestor de arranque que usa el servidor. Modifica la configuración para que el menú
+de arranque se muestre durante 25 segundos. ¿Qué fichero has modificado? ¿Qué otros
+gestores de arranque conoces?
+
+el servidor utiliza el gestor de arranque GRUB, el fichero a modificar sería /etc/default/grub.
+hay que cambiar la variable GRUB_TIMEOUT=25 y después ejecutar "sudo update-grub"
+
+Gestionar librerías compartidas
+1. Indicar las librerías compartidas que utiliza el programa “ls”
+primero busco donde está el binario de ls
+despliegue@ESMADLX22PROC1DEV:~$ which ls
+/usr/bin/ls
+
+después con el comando ldd veo que librerias utiliza
+despliegue@ESMADLX22PROC1DEV:~$ ldd /usr/bin/ls
+        linux-vdso.so.1 (0x00007ffecff08000)
+        libselinux.so.1 => /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007f02d90df000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f02d8eed000)
+        libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007f02d8e55000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f02d8e4f000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f02d9140000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f02d8e2c000)
+
+Uso de rpm/yum
+1. Obtén el listado de todos los paquetes rpm instalados en el sistema.
+se hace con este comando, aunque no tengo ninguno instalado
+despliegue@ESMADLX22PROC1DEV:~$ rpm -qa
+
+2. Lista los repositorios configurados en el sistema
+  cat /etc/apt/sources.list # debian
+  cat /etc/yum.repos.d/*.repo # CentOS
+  cat /etc/pacman.conf #Arch Linux
+  zypper repos #SUSE
+
+Virtualización
+1. Define brevemente los conceptos de máquina virtual y contenedor, resaltando las diferencias
+entre ambos.
+
+  -Una máquina virtual es una imagen de un sistema operativo que se ejecuta sobre otro sistema operativo, creando un entorno completamente aislado del sistema operativo anfitrión. En este caso, se emula un hardware virtualizado y se pueden ejecutar múltiples sistemas operativos en una sola máquina física. Cada máquina virtual tiene su propio sistema operativo, aplicaciones y recursos asignados.
+
+  -Un contenedor es una forma de virtualización a nivel de sistema operativo en la que se ejecutan aplicaciones y servicios de forma aislada, pero comparten el mismo kernel del sistema operativo anfitrión. Los contenedores son más livianos y rápidos de iniciar que las máquinas virtuales, ya que no requieren emular un sistema operativo completo. Cada contenedor contiene las dependencias y recursos necesarios para ejecutar una aplicación específica.
+  
+  En resumen, las principales diferencias entre máquinas virtuales y contenedores son:
+  
+  *  Máquinas virtuales: Emulan un hardware virtualizado y permiten ejecutar múltiples sistemas operativos en una sola máquina física. Cada máquina virtual tiene su propio sistema operativo y recursos asignados.
+  
+  *  Contenedores: Comparten el mismo kernel del sistema operativo anfitrión y ejecutan aplicaciones de forma aislada. Son más livianos y rápidos de iniciar que las máquinas virtuales.
+
+Trabajar con la línea de comandos
+1. Indica la ruta completa donde se ubica el programa “ls”.
+
+  which ls
+
+Flujos de texto y filtros
+1. Utiliza las herramientas de tratamiento de texto que conoces para obtener una lista ordenada
+sin elementos repetidos con las distintas shells que usan los usuarios definidos internamente
+en el servidor.
+
+grep /bin/ /etc/passwd | sed "s/:.*:\/bin/\ tarea\ AGG\  ->\/bin/g" |sort |uniq
+
+despliegue@ESMADLX22PROC1DEV:~$ grep /bin/ /etc/passwd | sed "s/:.*:\/bin/\ tarea\ AGG\  ->\/bin/g" |sort |uniq
+usuario1 tarea AGG  ->/bin/bash
+angel tarea AGG  ->/bin/bash
+
+Gestión de ficheros básica
+1. Realiza una copia de seguridad de la carpeta /etc en la raíz del sistema. La copia debe
+consistir en un único fichero comprimido.
+
+  sudo tar -czvf /ruta/de/destino/copia_de_seguridad.tar.gz /etc
+
+2. Realiza una nueva copia de seguridad igual que en el punto 1, pero ahora utiliza un
+algoritmo de compresión diferente.
+
+  zip -r /ruta/de/destino/copia_de_seguridad.zip etc
+
+3. Crear una carpeta “restaruracion” que cuelgue directamente de la raíz y restaurar
+
+  mkdir /restauracion
+  tar -xzvf archivo_comprimido.zip -C /descomprimir
+  unzip archivo_comprimido.zip -d /descomprimir
+
+
+Flujos, “pipes” y redirecciones
+1. Repetir el ejercicio del apartado “Flujo de texto y filtros”. Pero en esta ocasión ejecutar todo
+en una única línea.
+
+  ya lo hice en una sola línea XD
+  grep /bin/ /etc/passwd | sed "s/:.*:\/bin/\ tarea\ AGG\  ->\/bin/g" |sort |uniq
+
+Crear, monitorizar y matar procesos
+1. Crear un proceso que se mantenga en espera durante 1 minuto utilizando la orden “sleep”
+
+touch prueba.sh
+nano prueba.sh
+despliegue@ESMADLX22PROC1DEV:~/dev$ cat prueba.sh
+#!/bin/bash
+sleep 60
+
+2. Ejecutar el mismo proceso del punto 1, pero en esta ocasión en segundo plano.
+
+despliegue@ESMADLX22PROC1DEV:~/dev$ chmod +x prueba.sh
+despliegue@ESMADLX22PROC1DEV:~/dev$ ./prueba.sh &
+[1] 685805
+despliegue@ESMADLX22PROC1DEV:~/dev$
+
+
+3. Ejecutar el proceso del punto 1, utilizar el comando apropiado para terminar el proceso
+antes de que finalice.
+
+despliegue@ESMADLX22PROC1DEV:~/dev$ jobs -l
+[1]+ 685805 Ejecutando              ./prueba.sh &
+despliegue@ESMADLX22PROC1DEV:~/dev$ kill 685805
+despliegue@ESMADLX22PROC1DEV:~/dev$ jobs -l
+[1]+ 685805 Terminado               ./prueba.sh
+
+Modificar la prioridad de los procesos
+1. Lanza de nuevo el proceso del apartado anterior. Revisa su prioridad y modifica su
+prioridad. Explica el procedimiento empleado para ello.
+
+la prioridad es el numero entre corchetes al ejecutar jobs -l [1], para cambiarlo lo hacemos con el comando "renice 2 -p 685805"
+explicando "renice [NUEVA PRIORIDAD] -p [PID]"
+
+Búsqueda en ficheros de texto con expresiones
+regulares
+1. Utilizando una búsqueda de texto en el fichero /etc/passwd indicar qué usuarios utilizan
+como shell bash.
+
+despliegue@ESMADLX22PROC1DEV:~/dev$ grep /bin/bash /etc/passwd | sed "s/:.*:\/bin/\ tarea\ AGG\  ->\/bin/g" |sort |uniq
+root tarea AGG  ->/bin/bash
+angel tarea AGG  ->/bin/bash
+
+
+Edición básica de ficheros
+1. Enumera un par de editores de texto que conozcas y que estén disponibles en el servidor.
+vi
+vim
+nano
+joe
+
+/*---------------------------------------------------------*/
+Creación de particiones y sistemas de ficheros
+Para la realización de los ejercicios de este apartado es necesario hacer previamente lo siguiente:
+Crear un fichero de tamaño 2GiB con “dd”
+[vagrant@localhost ~]$ pwd
+/home/vagrant
+[vagrant@localhost ~]$ dd if=/dev/zero of=disco.img bs=1MiB count=1024
+1024+0 records in
+1024+0 records out
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 1.65388 s, 649 MB/s
+Asociar el disco a un dispositivo de bucle local con losetup.
+[vagrant@localhost ~]$ sudo losetup -fP disco.img
+[vagrant@localhost ~]$ sudo losetup -l | grep disco
+/dev/loop0 0 0 0 0 /home/vagrant/disco.img 0 512
+A partir de aquí se puede realizar el ejercicio sobre el dispositivo de bucle, en el caso del ejemplo
+anterior /dev/loop0.
+1. Crear una partición primaria de 512MB en el dispositivo de bucle creado anteriormente.
+
+2. Formatear la partición creada en el punto anterior con el sistema de ficheros ext3.
+
+Mantenimiento de los sistemas de ficheros
+1. Enumera algunas herramientas que conozcas para revisar el estado de los sistemas de
+ficheros.
+2. Revisa el estado del sistema de ficheros que creamos en el apartado anterior
+Montar y desmontar sistemas de ficheros
+1. Genera un UUID para la partición creada en el apartado “Creación de particiones y sistemas
+de ficheros”
+2. Modifica el fichero /etc/fstab para que la partición del punto 1 se monte automáticamente en
+la carpeta /mnt
+3. Una vez realizado el punto 2 y comprobado que el funcionamiento es el coorecto, deshacer
+los cambios en el fichero /etc/fstab y montar la partición utilizando esta vez una unidad de
+montaje systemd.
+Gestionar permisos y propiedad de ficheros
+1. Crea un fichero con el usuario por defecto. Comprueba los permisos asociados y el
+propietario
+2. Cambia a root. Cambia el propietario del fichero creado en el punto 1 a root y asigna
+permisos de lectura, escritura y ejecución únicamente al propietario.
+Enlaces duros y enlaces simbólicos
+1. Crea un enlace duro y un enlace simbólico al fichero creado en el apartado anterior.
+2. Lista los enlaces duro y simbólico con el comando “ls -l”. Indica qué diferencias observas.
+Búsqueda de ficheros
+1. Localiza el fichero “50-coredump.conf”. Indica la ruta completa en la que se encuentra.
+2. ¿Qué comando has utilizado? ¿Qué otros comandos de búsqueda conoces?
