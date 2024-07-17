@@ -264,7 +264,14 @@ anterior /dev/loop0.
 Mantenimiento de los sistemas de ficheros
 1. Enumera algunas herramientas que conozcas para revisar el estado de los sistemas de
 ficheros.
-2. Revisa el estado del sistema de ficheros que creamos en el apartado anterior
+  df: muestra el espacio utilizado y disponible en los sistemas de archivos
+  du: muestra el tamaño de los directorios y archivos
+  file: muestra el tipo de archivo
+  stat: muestra información detallada sobre un archivo o directorio
+  fsck: verifica y repara sistemas de archivos dañados
+
+2. Revisa el estado del sistema de ficheros que creamos en el apartado anterior.
+  
 Montar y desmontar sistemas de ficheros
 1. Genera un UUID para la partición creada en el apartado “Creación de particiones y sistemas
 de ficheros”
