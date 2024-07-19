@@ -257,9 +257,48 @@ Asociar el disco a un dispositivo de bucle local con losetup.
 /dev/loop0 0 0 0 0 /home/vagrant/disco.img 0 512
 A partir de aquí se puede realizar el ejercicio sobre el dispositivo de bucle, en el caso del ejemplo
 anterior /dev/loop0.
+
+-----Mi servidor
+loty@ubunsrv:~$ pwd
+/home/loty
+loty@ubunsrv:~$ dd if=/dev/zero of=disco.img bs=1MiB count=1024
+1024+0 records in
+1024+0 records out
+1073741824 bytes (1,1 GB, 1,0 GiB) copied, 1,44178 s, 745 MB/s
+loty@ubunsrv:~$ sudo losetup -fP disco.img
+[sudo] password for loty: 
+loty@ubunsrv:~$ losetup -l | grep disco
+/dev/loop7         0      0         0  0 /home/loty/disco.img                    0     512
+--------------
+
 1. Crear una partición primaria de 512MB en el dispositivo de bucle creado anteriormente.
 
+(parted) mkpart primary ext3 0% 512MB                                     
+(parted) print                                                            
+Model: Loopback device (loopback)
+Disk /dev/loop7: 1074MB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End    Size   Type     File system  Flags
+ 1      1049kB  512MB  511MB  primary  ext3         lb
+
 2. Formatear la partición creada en el punto anterior con el sistema de ficheros ext3.
+
+loty@ubunsrv:~$ sudo mkfs.ext3 /dev/loop7p1                               
+mke2fs 1.46.5 (30-Dec-2021)
+Discarding device blocks: done                            
+Creating filesystem with 124672 4k blocks and 124672 inodes
+Filesystem UUID: da718c0b-2713-471a-bab4-c6e78df5cae9
+Superblock backups stored on blocks: 
+  32768, 98304
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (4096 blocks): done
+Writing superblocks and filesystem accounting information: done
+
 
 Mantenimiento de los sistemas de ficheros
 1. Enumera algunas herramientas que conozcas para revisar el estado de los sistemas de
@@ -272,22 +311,115 @@ ficheros.
 
 2. Revisa el estado del sistema de ficheros que creamos en el apartado anterior.
   
+  loty@ubunsrv:/dev$ sudo fsck /dev/loop7p1
+  fsck from util-linux 2.37.2
+  e2fsck 1.46.5 (30-Dec-2021)
+  /dev/loop7p1: clean, 11/124672 files, 12003/124672 blocks
+
+
 Montar y desmontar sistemas de ficheros
 1. Genera un UUID para la partición creada en el apartado “Creación de particiones y sistemas
 de ficheros”
-2. Modifica el fichero /etc/fstab para que la partición del punto 1 se monte automáticamente en
-la carpeta /mnt
+  loty@ubunsrv:/dev$ uuidgen
+  ea697de4-83fe-4d0e-a68a-75352c9d4289
+2. Modifica el fichero /etc/fstab para que la partición del punto 1 se monte automáticamente en la carpeta /mnt
+
+root@ubunsrv:/dev# blkid
+/dev/loop7p1: UUID="da718c0b-2713-471a-bab4-c6e78df5cae9" SEC_TYPE="ext2" BLOCK_SIZE="4096" TYPE="ext3" PARTUUID="174bac9a-01"
+root@ubunsrv:/dev#nano /etc/fstab
+
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/ubuntu-vg/ubuntu-lv during curtin installation
+/dev/disk/by-id/dm-uuid-LVM-e23V0VChbo2lniJcPkkDs1Repab1YVp92JdPmhIoTWk2F0qPfjk>
+# /boot was on /dev/sda2 during curtin installation
+/dev/disk/by-uuid/068c53d3-d835-4888-bc42-d32c8980d984 /boot ext4 defaults 0 1
+/swap.img       none    swap    sw      0       0
+/dev/sdb1    /home/loty ext4 defaults   0       0
+
+UUID="da718c0b-2713-471a-bab4-c6e78df5cae9" /mnt ext3 defaults 0 0
+
+
+
+
 3. Una vez realizado el punto 2 y comprobado que el funcionamiento es el coorecto, deshacer
 los cambios en el fichero /etc/fstab y montar la partición utilizando esta vez una unidad de
 montaje systemd.
+
+para deshacer el cambio solo se borra la línea de fstab
+
+creo un archivo llamado mi_particion.mount en /etc/systemd/system/ cotenido
+
+root@ubunsrv:/etc/systemd/system/# nano mi_particion.mount
+
+[Unit]
+Description=Montaje de Mi Partición
+
+[Mount]
+What=UUID=el_UUID_de_tu_partición
+Where=/mnt
+Type=ext3
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target
+---
+
+root@ubunsrv:/etc/systemd/system/#sudo systemctl daemon-reload
+
+root@ubunsrv:/etc/systemd/system/#sudo systemctl enable mi_particion.mount
+
+root@ubunsrv:/etc/systemd/system/#sudo systemctl start mi_particion.mount
+
 Gestionar permisos y propiedad de ficheros
 1. Crea un fichero con el usuario por defecto. Comprueba los permisos asociados y el
 propietario
+
+loty@ubunsrv:~$ touch fichero.txt
+loty@ubunsrv:~$ ls -l fichero.txt 
+-rw-rw-r-- 1 loty loty 0 jul 17 10:09 fichero.txt
+
+
 2. Cambia a root. Cambia el propietario del fichero creado en el punto 1 a root y asigna
 permisos de lectura, escritura y ejecución únicamente al propietario.
 Enlaces duros y enlaces simbólicos
+
+loty@ubunsrv:~$ sudo chown root fichero.txt
+[sudo] password for loty: 
+loty@ubunsrv:~$ ls -l fichero*
+-rw-rw-r-- 1 root loty 0 jul 17 10:09 fichero.txt
+
+loty@ubunsrv:~$ sudo chmod u=rwx,g=r,o=r fichero.txt
+loty@ubunsrv:~$ ls -l fichero.txt
+-rwxr--r-- 1 root loty 0 jul 17 10:09 fichero.tx
+
+
 1. Crea un enlace duro y un enlace simbólico al fichero creado en el apartado anterior.
+
+loty@ubunsrv:~$ sudo ln fichero.txt enlace_duro
+loty@ubunsrv:~$ sudo ln -s fichero.txt enlace_sinbolic
+
+
+
+
 2. Lista los enlaces duro y simbólico con el comando “ls -l”. Indica qué diferencias observas.
+
+-rwxr--r-- 2 root          0 jul 17 10:09 fichero.txt
+-rwxr--r-- 2 root          0 jul 17 10:09 enlace_duro
+lrwxrwxrwx 1 root         11 jul 17 10:13 enlace_sinbolico -> fichero.txt
+
+el enlace duro es otro fichero y si elimino este se eliminará también el fichero original, en cambio el enlace simbólico es un acceso directo y nada le pasará al fichero original si se elimina.
 Búsqueda de ficheros
 1. Localiza el fichero “50-coredump.conf”. Indica la ruta completa en la que se encuentra.
+
+loty@ubunsrv:~$ locate 50-coredump.conf
+locate: warning: database ‘/var/cache/locate/locatedb’ is more than 8 days old (actual age is 200,2 days)
+
 2. ¿Qué comando has utilizado? ¿Qué otros comandos de búsqueda conoces?
+
+he utilizado locate, el cual tiene una base de datos con todo el arbol de directorios y es muy rápido y facil de usar.  También podríamos haber usado find, pero este tardaría más y utilizaría más recursos.

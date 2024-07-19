@@ -1,0 +1,302 @@
+Personalizar y usar la shell
+1. Crea un alias para el comando rm de modo que al intentar borrar un fichero siempre pida
+confirmación.
+  alias rm='rm -i'
+
+2. Asegúrate de que el alias creado en el punto 1 esté disponible de forma permanente en el
+sistema.
+
+loty@ubunsrv:~$ nano .bashrc
+alias rm='rm -i'
+
+reiniciamos o recargamos ". .bashrc o source bashrc"
+
+loty@ubunsrv:~$ touch hola.txt
+loty@ubunsrv:~$ rm hola.txt 
+rm: remove regular empty file 'hola.txt'? y
+
+
+Escribir scripts sencillos
+1. Crear un sencillo script que pregunte el nombre del usuario y devuelva el mensake “Hola
+nombre_de_usuario”
+
+loty@ubunsrv:~$ nano saludar.sh
+#!/bin/bash
+echo "Hola ¿Como te llamas?" 
+read nombre
+echo "--> Hola ${nombre}"
+
+loty@ubunsrv:~$ chmod +x saludar.sh
+
+ejecucion:
+loty@ubunsrv:~$ ./saludar.sh 
+Hola ¿Como te llamas?
+pedrop
+--> Hola pedrop
+
+2. Crear un sencillo script al que se le pase como argumento la ruta a un fichero o carpeta. El script deberá ejecutar internamente el comando “ls” sobre esa ruta y, dependiendo del valor de retorno del comando, devolverá el mensaje: “el fichero existe” o “el fichero NO existe” respectivamente.
+
+loty@ubunsrv:~$ nano comprobador_ficheros.sh
+#!/bin/bash
+if [[ -d ${1} ]]; then
+ echo "la ruta ${1} existe"
+else
+ echo "la ruta ${1} no existe"
+fi
+
+loty@ubunsrv:~$ chmod +x comprobador_ficheros.sh
+
+loty@ubunsrv:~$ ./comprobador_ficheros.sh /home
+la ruta /home existe
+loty@ubunsrv:~$ ./comprobador_ficheros.sh /home/LPIC
+la ruta /home/LPIC no existe
+
+X11
+1. Describe brevemente la arquitectura X11.
+
+La arquitectura X11, parte del sistema X Window, se basa en un modelo cliente-servidor que separa la visualización y el manejo de entrada (servidor) de la lógica de la aplicación (cliente). Esta estructura permite la transparencia de la red y admite varias aplicaciones gráficas. Además, X11 admite extensiones que introducen nuevas funcionalidades, como operaciones gráficas avanzadas, soporte adicional para dispositivos de entrada o mecanismos de seguridad mejorados. El protocolo de comunicación entre el servidor y el cliente es transparente a la red, lo que permite su ejecución en diferentes máquinas y sistemas operativos.
+
+Escritorios gráficos
+1. Enumera qué escritorios gráficos conoces.
+
+    Unity: Utilizado en Ubuntu.
+    KDE: Común en openSUSE.
+    GNOME: Predeterminado en Fedora.
+    Cinnamon: Desarrollado por el equipo de Linux Mint.
+    Enlightenment (E): Conocido por su atractivo visual y flexibilidad.
+    Deepin: Destacado por su diseño atractivo y accesos directos intuitivos.
+    Plasma: Ofrece un alto grado de personalización y es adecuado para usuarios avanzados.
+    MATE: Un fork de GNOME 2, que ofrece un entorno intuitivo y atractivo.
+    Xfce: Conocido por su enfoque en la modularidad y ligereza.
+
+
+Gestionar cuentas de usuarios y grupos
+1. Crea un nuevo usuario llamado “Tux” y un grupo llamado “admins”. Asigna una contraseña
+al usuario “Tux”.
+
+root@ubunsrv:/home/loty# groupadd admins
+root@ubunsrv:/home/loty# useradd -m -G admins tux
+root@ubunsrv:/home/loty# passwd tux
+New password: 
+Retype new password: 
+passwd: password updated successfully
+
+2. Haz que el usuario “Tux” creado previamente sea miembro del grupo “admins”,
+manteniendo la pertenencia a los grupos de los que ya formaba parte anteriormente.
+
+lo he asignado directamente, pero, sería así
+usermod -aG admins tux
+
+3. Muestra la fecha de cambio de contraseña del usuario Tux y la de expiración de dicha
+contraseña. Modifica la fecha de expiración para que expire en unos 30 días. ¿Qué comando
+has utilizado?
+
+root@ubunsrv:/home/loty# chage -l tux
+Last password change					: jul 17, 2024
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+
+root@ubunsrv:/home/loty# chage -M 30 tux
+
+root@ubunsrv:/home/loty# chage -l tux
+Last password change					: jul 17, 2024
+Password expires					: ago 16, 2024
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 30
+Number of days of warning before password expires	: 7
+
+
+Automatizar tareas de administración programando trabajos
+1. Crea una tarea de cron que escriba la fecha en un fichero /tmp/fecha y que se ejecute de
+lunes a viernes cada 10 minutos.
+root@ubunsrv:/home/loty# crontab -e
+*/10 * * * 1-5 date >> /tmp/fecha
+crontab: installing new crontab
+
+root@ubunsrv:/home/loty# cat /tmp/fecha.txt 
+mié 17 jul 2024 11:04:02 UTC
+
+2. Crea una tarea puntual que se ejecute dentro de 10 minutos y que escriba “Hola” en el
+fichero /tmp/saludo.txt
+
+*/10 * * * * echo "hola" >> /tmp/saludo.txt
+
+Localización e internacionalización
+1. Indica la configuración local por defecto del sistema.
+
+root@ubunsrv:/home/loty# locale
+LANG=es_ES.UTF-8
+LANGUAGE=
+LC_CTYPE="es_ES.UTF-8"
+LC_NUMERIC="es_ES.UTF-8"
+LC_TIME="es_ES.UTF-8"
+LC_COLLATE="es_ES.UTF-8"
+LC_MONETARY="es_ES.UTF-8"
+LC_MESSAGES="es_ES.UTF-8"
+LC_PAPER="es_ES.UTF-8"
+LC_NAME="es_ES.UTF-8"
+LC_ADDRESS="es_ES.UTF-8"
+LC_TELEPHONE="es_ES.UTF-8"
+LC_MEASUREMENT="es_ES.UTF-8"
+LC_IDENTIFICATION="es_ES.UTF-8"
+LC_ALL=
+
+
+2. Cambia la configuración local del sistema a es_ES.utf-8. Instalando el software requerido.
+Comprueba que ahora los mensajes del SO aparecen en español. Por ejemplo al listar un
+fichero inexistente debería aparecer esto: “ls: cannot access '/tmp/no_existe': No existe el
+fichero o el directorio”
+
+root@ubunsrv:/home/loty# sudo apt install language-pack-es
+root@ubunsrv:/home/loty# update-locale LANG=es_ES.UTF-8
+
+
+Mantener la hora del sistema
+1. Indica la hora y la zona horaria por defecto del sistema.
+
+root@ubunsrv:/home/loty# timedatectl
+               Local time: mié 2024-07-17 11:25:48 UTC
+           Universal time: mié 2024-07-17 11:25:48 UTC
+                 RTC time: mié 2024-07-17 11:25:48
+                Time zone: Etc/UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+2. Cambia la zona horaria para que coincida con tu zona horaria. En el caso de que la zona
+horaria por defecto coincida con tu zona horaria cambia dicha zona a cualquier otra
+únicamente para ver el procedimiento.
+
+
+root@ubunsrv:/home/loty# timedatectl set-timezone Europe/Madrid
+root@ubunsrv:/home/loty# timedatectl
+               Local time: mié 2024-07-17 13:27:13 CEST
+           Universal time: mié 2024-07-17 11:27:13 UTC
+                 RTC time: mié 2024-07-17 11:27:13
+                Time zone: Europe/Madrid (CEST, +0200)
+System clock synchronized: yes
+              NTP service: a
+
+Logs del sistema
+1. Revisa el journal del sistema mostrando solo las entradas del día de hoy.
+
+root@ubunsrv:/home/loty# journalctl --since today
+jul 17 11:02:32 ubunsrv kernel: Linux version 5.15.0-91-generic (buildd@lcy02-amd64-045) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) >
+jul 17 11:02:32 ubunsrv kernel: Command line: BOOT_IMAGE=/vmlinuz-5.15.0-91-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro
+jul 17 11:02:32 ubunsrv kernel: KERNEL supported cpus:
+jul 17 11:02:32 ubunsrv kernel:   Intel GenuineIntel
+jul 17 11:02:32 ubunsrv kernel:   AMD AuthenticAMD
+jul 17 11:02:32 ubunsrv kernel:   Hygon HygonGenuine
+jul 17 11:02:32 ubunsrv kernel:   Centaur CentaurHauls
+jul 17 11:02:32 ubunsrv kernel:   zhaoxin   Shanghai  
+jul 17 11:02:32 ubunsrv kernel: BIOS-provided physical RAM map:
+jul 17 11:02:32 ubunsrv kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+jul 17 11:02:32 ubunsrv kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+
+
+
+2. Modifica la configuración de rsyslog para creando una asociación entre la “facility” local6 registre los eventos en el fichero /var/log/testlocal.log.
+
+root@ubunsrv:/home/loty# echo "local6.* /var/log/testlocal.log" | tee -a /etc/rsyslog.conf
+local6.* /var/log/testlocal.log
+root@ubunsrv:/home/loty# tail /etc/rsyslog.conf 
+#
+# Where to place spool and state files
+#
+$WorkDirectory /var/spool/rsyslog
+
+#
+# Include all config files in /etc/rsyslog.d/
+#
+$IncludeConfig /etc/rsyslog.d/*.conf
+local6.* /var/log/testlocal.log
+
+despues reiniciamos el servicio
+root@ubunsrv:/home/loty# systemctl restart rsyslog
+
+3. Comprueba que los eventos enciados a local6 se registran en el fichero indicado previamente. ¿Qué comando has utilizado?
+
+root@ubunsrv:/home/loty# logger -p local6.info "Este es un mensaje de prueba para local6"
+root@ubunsrv:/home/loty# sudo tail -f /var/log/testlocal.log
+Este es un mensaje de prueba para local6
+
+
+MTAs (agentes de transferencia de correo)
+1. Indica algunos MTAs que conozcas
+
+    Postfix:
+        Postfix es un MTA de código abierto que se utiliza para enrutar y entregar correo electrónico en sistemas Unix y Linux. Es conocido por su enfoque en la seguridad y su facilidad de configuración.
+    Sendmail:
+        Sendmail es uno de los MTAs más antiguos y ampliamente utilizados. Ha sido una parte integral de la infraestructura de correo electrónico de Internet durante décadas.
+    Exim:
+        Exim es un MTA flexible y fácil de configurar que se utiliza en sistemas Unix y Linux. Es conocido por su capacidad para manejar una variedad de configuraciones de correo electrónico.
+    Qmail:
+        Qmail es otro MTA de código abierto que se centra en la seguridad y la confiabilidad. Ha sido elogiado por su diseño modular y su enfoque en la prevención de spam.
+
+2. Comprueba si el sistema tiene preinstalado alguno de esos MTAs. De no ser así instala
+postfix y activa el correspondiente servicio.
+
+root@ubunsrv:/home/loty# apt-get install postfix
+Leyendo lista de paquetes... Hecho
+Creando árbol de dependencias... Hecho
+Leyendo la información de estado... Hecho
+Se instalarán los siguientes paquetes adicionales:
+  ssl-cert
+Paquetes sugeridos:
+  procmail postfix-mysql postfix-pgsql postfix-ldap postfix-pcre postfix-lmdb postfix-sqlite sasl2-bin | dovecot-common
+  resolvconf postfix-cdb mail-reader postfix-mta-sts-resolver postfix-doc
+Se instalarán los siguientes paquetes NUEVOS:
+  postfix ssl-cert
+0 actualizados, 2 nuevos se instalarán, 0 para eliminar y 165 no actualizados.
+Se necesita descargar 1.265 kB de archivos.
+Se utilizarán 4.248 kB de espacio de disco adicional después de esta operación.
+¿Desea continuar? [S/n] 
+
+en las pantallas establecemos las siguientes respuestas:
+
+
+
+
+3. Crea 2 usuarios usuario1 y usuario2. Instala el programa mailx si no está instalado y haz que
+usuario1 envíe un correo al usuario2. Comprueba que usuario2 ha recibido el correo
+
+Gestión de la impresión
+1. Instala CUPS en el servidor e inicia el servicio asociado
+2. Indica el directorio donde se encuentran los archivos de configuración de CUPS.
+3. Edita el fichero de configuración principal para que CUPS escuche en todas las interfaces de
+red y no solo en loclahost. Asegúrate de que los cambios sean efectivos recargando el
+servicio.
+
+Fundamentos de los protocolos de Internet
+1. Muestra la configuración de red del servidor
+
+Configuración de red persistente
+1. Utilizando comandos de gestión de Network Manager lista las conexiones activas en el
+servidor. Indicando el tipo de conexión.
+2. Utilizando nuevamente comandos de NM muestra los detalles de cada dispositivo
+gestionado por NM.
+
+Configuración DNS en el cliente
+1. Muestra la configuración cliente DNS en el servidor.
+2. Instala dig y/o host y realiza una consulta al servidor DNS para obtener la IP del host
+cloudftic.com
+
+Tareas de administración de seguridad
+1. Revisa la configuración actual del fichero /etc/sudoers del servidor. ¿Hay algún usuario o
+grupo que tenga permisos para ejecutar comandos como root? ¿Cuál?
+2. Incluye al usuario Tux creado previamente en la configuración de /etc/sudoers para que
+pueda ejecutar comandos como root introduciendo su contraseña
+3. Localiza todos los ficheros con el bit SUID activo.
+
+Asegurando los datos con encriptación
+1. En el servidor abre una shell como el usuario Tux creado previamente y genera una clave
+ssh para dicho usuario.
+2. Configura el sistema para que el usuario Tux pueda conectarse por ssh al mismo servidor
+utilizando la clave creada en el punto1, sin utilizar contraseña.
+3. Encripta un fichero con gpg.
